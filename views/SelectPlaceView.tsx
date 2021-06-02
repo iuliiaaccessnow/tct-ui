@@ -79,14 +79,16 @@ const SelectPlaceView = () => {
                 </View>
               )}
             />
-            <TouchableHighlight
-              disabled={false}
-              onPress={() => console.log('close button is pressed')}>
-              <Image
-                source={require('../assets/Utils_Icons/Add_Button.png')}
-                accessibilityLabel={'icon'}
-              />
-            </TouchableHighlight>
+            <View style={styles.closeButton}>
+              <TouchableHighlight
+                disabled={false}
+                onPress={() => console.log('close button is pressed')}>
+                <Image
+                  source={require('../assets/Utils_Icons/Add_Button.png')}
+                  accessibilityLabel={'icon'}
+                />
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </View>
