@@ -16,134 +16,56 @@ const data = [
   {
     id: 0,
     name: 'Bench',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/bench.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/bench_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/bench.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/bench_Selected.png'),
   },
   {
     id: 1,
     name: 'Picnic Table',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/picnic_table.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/picnic_table_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/picnic_table.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/picnic_table_Selected.png'),
   },
   {
     id: 2,
     name: 'Parking',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/Parking.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/Parking_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/Parking.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/Parking_Selected.png'),
   },
   {
     id: 3,
     name: 'Park',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/park.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/park_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/park.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/park_Selected.png'),
   },
   {
     id: 4,
     name: 'Washroom',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/Washroom.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/Washroom_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/Washroom.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/Washroom_Selected.png'),
   },
   {
     id: 5,
     name: 'Water Fountain',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/WaterFountain.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/WaterFountain_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/WaterFountain.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/WaterFountain_Selected.png'),
   },
   {
     id: 6,
     name: 'Information Area',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/Information.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/Information_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/Information.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/Information_Selected.png'),
   },
   {
     id: 7,
     name: 'Other',
-    icon: (
-      <Image
-        source={require('../assets/Amenities_PNG/other.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
-    iconSelected: (
-      <Image
-        source={require('../assets/Amenities_PNG/other_Selected.png')}
-        accessibilityLabel={'icon'}
-      />
-    ),
+    iconPath: require('../assets/Amenities_PNG/other.png'),
+    iconSelectedPath: require('../assets/Amenities_PNG/other_Selected.png'),
   },
 ];
 
+// const AmenityView = (amenityVisible: boolean) => {
 const AmenityView = () => {
+  // console.log('amenityVisible: ' + amenityVisible);
   //const [markVisible , setMarkVisible] = useState(false);
   const [markSelected, setMarkSelected] = useState([]);
   // const [rateVisible, setRateVisible] = useState(false);
@@ -152,38 +74,55 @@ const AmenityView = () => {
   const handlePress = item => {
     checked ? setChecked(true) : setChecked(false);
     console.log(item.name);
-    // eslint-disable-next-line no-shadow
-    setMarkSelected(markSelected => [{...markSelected}, item]);
+    setMarkSelected(item.id);
   };
   console.log(markSelected);
   console.log(checked);
+
+  const closePanel = () => {
+    console.log('Close Amenities Panel');
+    //dispatch(updateMark(false))
+  };
+
+  const getIconSource = item => {
+    return markSelected === item.id ? item.iconSelectedPath : item.iconPath;
+  };
+
   return (
-    <Modal animationType="fade" transparent={true} visible={true}>
+    <Modal
+      animationType="fade"
+      transparent={true}
+      // visible={amenityVisible}
+      visible={true}
+      onRequestClose={closePanel}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.markTypeContainer}>
             {/* <Icon /> */}
             <Image
-              source={require('../assets/Amenity.png')}
+              source={require('../assets/Places/Amenity.png')}
               accessibilityLabel={'icon'}
             />
             <Text style={styles.textStyleMain}>Amenity</Text>
-            <View>
-              <Divider style={styles.divider} />
-            </View>
+            <Divider style={styles.divider} />
           </View>
           <View style={styles.other}>
             <FlatList
-              // style={styles.icons}
+              contentContainerStyle={styles.listItem}
+              //style={styles.icons}
               data={data}
               // keyExtractor={(item, index) => item.id}
               numColumns={3}
+              snapToAlignment={'center'}
               renderItem={({item, index}) => (
                 <View key={index} style={styles.icon}>
                   <TouchableHighlight
                     disabled={false}
                     onPress={() => handlePress(item)}>
-                    {markSelected ? item.icon : item.iconSelected}
+                    <Image
+                      source={getIconSource(item)}
+                      accessibilityLabel={'icon'}
+                    />
                   </TouchableHighlight>
                   <Text style={styles.textStyle}>{item.name}</Text>
                 </View>
@@ -198,7 +137,7 @@ const AmenityView = () => {
 
 const styles = StyleSheet.create({
   centeredView: {
-    padding: 50,
+    padding: 30,
     display: 'flex',
     flex: 1,
     alignItems: 'center',
@@ -211,11 +150,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   markTypeContainer: {
-    flex: 0.3,
+    flex: 0.15,
     padding: 10,
+    alignItems: 'center',
   },
   other: {
-    flex: 0.6,
+    flex: 0.9,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -223,8 +163,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  listItem: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   icon: {
-    padding: 10,
+    padding: 15,
+    alignItems: 'center',
+    width: 120,
+    height: 120,
   },
   textStyleMain: {
     color: 'white',
@@ -235,11 +182,12 @@ const styles = StyleSheet.create({
   textStyle: {
     color: 'white',
     textAlign: 'center',
+    //resizeMode: "contain",
   },
   divider: {
     height: 2,
     alignSelf: 'stretch',
-  }
+  },
 });
 
 export default AmenityView;

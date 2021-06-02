@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState} from 'react';
-import {
-  Image,
-  Modal,
-  Pressable,
-  StyleSheet,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AmenityView from './views/AmenityView';
+import SelectPlaceView from './views/SelectPlaceView';
 const styles = StyleSheet.create<any>({
   container: {
     flex: 1,
@@ -26,7 +20,8 @@ const App = () => {
         onPress={() => setModalVisible(true)}>
         <Text style={styles.textStyle}>Show Modal</Text>
       </Pressable> */}
-      <AmenityView />
+      {/* <AmenityView /> */}
+      <SelectPlaceView />
     </View>
   );
 };
