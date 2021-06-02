@@ -91,14 +91,16 @@ const SelectPlaceView = () => {
         </View>
       </View>
       <View style={styles.footer}>
-        <TouchableHighlight
-          disabled={false}
-          onPress={() => console.log('close button is pressed')}>
-          <Image
-            source={require('../assets/Utils_Icons/Upload_Button.png')}
-            accessibilityLabel={'icon'}
-          />
-        </TouchableHighlight>
+        <View style={styles.footerIcon}>
+          <TouchableHighlight
+            disabled={false}
+            onPress={() => console.log('close button is pressed')}>
+            <Image
+              source={require('../assets/Utils_Icons/Upload_Button.png')}
+              accessibilityLabel={'icon'}
+            />
+          </TouchableHighlight>
+        </View>
         <TouchableHighlight
           disabled={false}
           onPress={() => console.log('close button is pressed')}>
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-around',
+    // flex: 1,
   },
   other: {
     alignItems: 'center',
@@ -155,8 +158,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
     alignSelf: 'stretch',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
+    flex: 0.2,
+  },
+  footerIcon: {
+    padding: 15,
+    width: 120,
+    height: 120,
+    alignSelf: 'flex-start',
   },
   footerText: {
     color: 'blue',
